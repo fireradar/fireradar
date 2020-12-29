@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2020-08-03-initial-schema" author="dkochergin">
+
+        <createTable tableName="FireIncident">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="acq_time" type="varchar(10)"/>
+            <column name="frp" type="decimal(38,20)"/>
+            <column name="acq_date" type="datetime"/>
+            <column name="latitude" type="decimal(38,20)"/>
+            <column name="confidence" type="varchar(100)"/>
+            <column name="scan" type="decimal(38,20)"/>
+            <column name="version" type="varchar(100)"/>
+            <column name="brightness" type="decimal(38,20)"/>
+            <column name="bright_t31" type="decimal(38,20)"/>
+            <column name="daynight" type="varchar(10)"/>
+            <column name="satellite" type="varchar(100)"/>
+            <column name="track" type="decimal(38,20)"/>
+            <column name="longitude" type="decimal(38,20)"/>
+            <column name="countryCodeIso3" type="varchar(10)"/>
+        </createTable>
+
+        <createIndex tableName="FireIncident" indexName="IDX_FIREINCIDENT_UNIQUE" unique="true">
+            <column name="longitude" type="decimal(38,20)"/>
+            <column name="latitude" type="decimal(38,20)"/>
+            <column name="acq_date" type="datetime"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="2020-09-07-add-more-indexes" author="dkochergin">
+        <createIndex tableName="FireIncident" indexName="IDX_FIREINCIDENT_acq_date">
+            <column name="acq_date" type="datetime"/>
+        </createIndex>
+
+        <createIndex tableName="FireIncident" indexName="IDX_FIREINCIDENT_countryCodeIso3">
+            <column name="countryCodeIso3" type="varchar(10)"/>
+        </createIndex>
+
+        <createIndex tableName="FireIncident" indexName="IDX_FIREINCIDENT_acq_date_countryCodeIso3">
+            <column name="acq_date" type="datetime"/>
+            <column name="countryCodeIso3" type="varchar(10)"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    jndi-name: false
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:file:~/fireradar_db;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;MODE=MSSQLServer
+    username: sa
+    password:
+
+logging:
+  level:
+    org.apache.http: DEBUG
+  path: ./backend/target/logs

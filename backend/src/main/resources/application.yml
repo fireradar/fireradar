@@ -1,0 +1,33 @@
+application:
+  version=1.0.0
+server:
+  port: 9000
+
+spring:
+  application:
+    name: fireradar
+
+  datasource:
+    jndi-name: jdbc/fireradar
+    dbcp:
+      test-on-borrow: true
+      test-while-idle: true
+      validation-query: SELECT 1
+
+  # Overrides Hibernate naming strategy for Spring Data JPA
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/liquibase-changelog.xml
+
+logging:
+  level:
+    org.apache.http: DEBUG
+  path: ./logs # logging.path=${catalina.base}/logs/
+
+spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.SQLServer2012Dialect
